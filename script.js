@@ -5,6 +5,36 @@ const minutesEl = document.getElementById("minutes");
 const secondsEl = document.getElementById("seconds");
 const celebration = document.getElementById("celebration");
 
+// --- Wskazówki zegara ---
+const hourHand = document.getElementById("hour-hand");
+const minuteHand = document.getElementById("minute-hand");
+const secondHand = document.getElementById("second-hand");
+
+// Wirtualny czas zegara (1h = 10s)
+let virtualTime = 0; // w sekundach
+
+function animateClock() {
+  // Każda sekunda rzeczywista = 1/10 godziny = 360°/12h * 0.1h/s = 3°/s
+  // Czyli 1 godzina trwa 10 sekund, więc 12 godzin = 120s.
+  virtualTime += 0.016; // ok. 60 FPS => 1s ≈ 60 * 0.016 = 0.96 (poprawka)
+
+  const hours = (virtualTime / 10) % 12; // 1h co 10s
+  const minutes = (hours * 60) % 60;
+  const seconds = (minutes * 60) % 60;
+
+  const hourDeg = (hours / 12) * 360;
+  const minuteDeg = (minutes / 60) * 360;
+  const secondDeg = (seconds / 60) * 360;
+
+  hourHand.style.transform = `translate(-50%, -100%) rotate(${hourDeg}deg)`;
+  minuteHand.style.transform = `translate(-50%, -100%) rotate(${minuteDeg}deg)`;
+  secondHand.style.transform = `translate(-50%, -100%) rotate(${secondDeg}deg)`;
+
+  requestAnimationFrame(animateClock);
+}
+animateClock();
+
+// --- Licznik odliczania ---
 function updateTimer() {
   const now = new Date();
   const diff = targetDate - now;
@@ -32,7 +62,7 @@ function updateTimer() {
 const interval = setInterval(updateTimer, 1000);
 updateTimer();
 
-/* 🎆 Prosta animacja fajerwerków na canvasie */
+/* 🎆 Prosta animacja fajerwerków */
 function startFireworks() {
   const canvas = document.getElementById("fireworks");
   const ctx = canvas.getContext("2d");
@@ -61,7 +91,7 @@ function startFireworks() {
       ctx.fill();
       p.x += p.speedX;
       p.y += p.speedY;
-      p.speedY += 0.2; // grawitacja
+      p.speedY += 0.2;
       if (p.y > canvas.height) particles.splice(i, 1);
     }
   }
