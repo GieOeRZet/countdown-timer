@@ -1,3 +1,4 @@
+/* === GŁÓWNY UKŁAD === */
 body {
   background-color: #000;
   color: #00ff99;
@@ -45,7 +46,7 @@ h1 {
   color: #00ffaa;
 }
 
-/* ---- Zegar w tle ---- */
+/* === ZEGAR W TLE === */
 .clock {
   position: fixed;
   width: 400px;
@@ -57,8 +58,17 @@ h1 {
   transform: translate(-50%, -50%);
   opacity: 0.3;
   z-index: 1;
+
+  /* 💫 obrót całego zegara (1 pełny obrót = 60 sekund) */
+  animation: rotateClock 60s linear infinite;
 }
 
+@keyframes rotateClock {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* === WSKAZÓWKI === */
 .hand {
   position: absolute;
   background: #00ff99;
@@ -96,7 +106,7 @@ h1 {
   transform: translate(-50%, -50%);
 }
 
-/* ---- Animacja końcowa ---- */
+/* === ANIMACJA KOŃCOWA === */
 .hidden {
   display: none;
 }
@@ -132,6 +142,7 @@ h1 {
   to { transform: translateY(-15px); }
 }
 
+/* === FAJERWERKI === */
 #fireworks {
   position: fixed;
   top: 0;
