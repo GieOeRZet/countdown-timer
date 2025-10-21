@@ -13,11 +13,29 @@ body {
 
 h1 {
   font-size: 1.5em;
-  margin-bottom: 1em;
+  margin-bottom: 1.5em;
 }
 
 #timer {
-  font-size: 2.5em;
+  display: flex;
+  gap: 2em;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.time-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.time-box span {
+  font-size: 3em;
   font-weight: bold;
-  letter-spacing: 2px;
+}
+
+.time-box label {
+  margin-top: 0.3em;
+  font-size: 1em;
+  color: #00ffaa;
 }
