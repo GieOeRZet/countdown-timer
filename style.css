@@ -3,13 +3,17 @@ body {
   color: #00ff99;
   font-family: 'Courier New', Courier, monospace;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   height: 100vh;
   margin: 0;
-  text-align: center;
   overflow: hidden;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
 }
 
 h1 {
@@ -41,7 +45,58 @@ h1 {
   color: #00ffaa;
 }
 
-/* Animacja końcowa */
+/* ---- Zegar w tle ---- */
+.clock {
+  position: fixed;
+  width: 400px;
+  height: 400px;
+  border: 8px solid rgba(0, 255, 153, 0.2);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.3;
+  z-index: 1;
+}
+
+.hand {
+  position: absolute;
+  background: #00ff99;
+  top: 50%;
+  left: 50%;
+  transform-origin: bottom center;
+  transform: translate(-50%, -100%) rotate(0deg);
+  border-radius: 10px;
+}
+
+.hand.hour {
+  width: 6px;
+  height: 100px;
+}
+
+.hand.minute {
+  width: 4px;
+  height: 140px;
+}
+
+.hand.second {
+  width: 2px;
+  height: 160px;
+  background: #00ffaa;
+}
+
+.center-dot {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: #00ffcc;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* ---- Animacja końcowa ---- */
 .hidden {
   display: none;
 }
@@ -58,6 +113,7 @@ h1 {
   align-items: center;
   justify-content: center;
   animation: fadeIn 2s ease-in-out;
+  z-index: 10;
 }
 
 .glasses, .champagne {
