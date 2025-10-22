@@ -1,4 +1,4 @@
-/* === GŁÓWNY UKŁAD === */
+/* === UKŁAD PODSTAWOWY === */
 body {
   background-color: #000;
   color: #00ff99;
@@ -12,14 +12,14 @@ body {
 }
 
 .content {
-  position: relative;
-  z-index: 2;
   text-align: center;
+  z-index: 2;
 }
 
 h1 {
   font-size: 1.5em;
   margin-bottom: 1.5em;
+  color: #00ffaa;
 }
 
 #timer {
@@ -46,95 +46,48 @@ h1 {
   color: #00ffaa;
 }
 
-/* === ZEGAR W TLE === */
-.clock {
-  position: fixed;
-  width: 400px;
-  height: 400px;
-  border: 8px solid rgba(0, 255, 153, 0.2);
-  border-radius: 50%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  opacity: 0.3;
-  z-index: 1;
-
-  /* 💫 obrót całego zegara (1 pełny obrót = 60 sekund) */
-  animation: rotateClock 60s linear infinite;
-}
-
-@keyframes rotateClock {
-  from { transform: translate(-50%, -50%) rotate(0deg); }
-  to { transform: translate(-50%, -50%) rotate(360deg); }
-}
-
-/* === WSKAZÓWKI === */
-.hand {
-  position: absolute;
-  background: #00ff99;
-  top: 50%;
-  left: 50%;
-  transform-origin: bottom center;
-  transform: translate(-50%, -100%) rotate(0deg);
-  border-radius: 10px;
-}
-
-.hand.hour {
-  width: 6px;
-  height: 100px;
-}
-
-.hand.minute {
-  width: 4px;
-  height: 140px;
-}
-
-.hand.second {
-  width: 2px;
-  height: 160px;
-  background: #00ffaa;
-}
-
-.center-dot {
-  position: absolute;
-  width: 12px;
-  height: 12px;
-  background: #00ffcc;
-  border-radius: 50%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-/* === ANIMACJA KOŃCOWA === */
+/* === ANIMACJA ŚWIĘTOWANIA === */
 .hidden {
   display: none;
 }
 
-
-
-.glasses, .champagne {
-  font-size: 5em;
-  animation: bounce 1s infinite alternate;
-  z-index: 2;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes bounce {
-  from { transform: translateY(0); }
-  to { transform: translateY(-15px); }
-}
-
-/* === FAJERWERKI === */
-#fireworks {
+#celebration {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 1;
+  background: radial-gradient(circle at center, #000 30%, #001a12 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  overflow: hidden;
+}
+
+.icons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  animation: floatIcons 3s ease-in-out infinite;
+}
+
+.emoji {
+  font-size: 4rem;
+  animation: bounce 1.5s ease-in-out infinite alternate;
+}
+
+/* Efekt podskakiwania ikon */
+@keyframes bounce {
+  from { transform: translateY(0); }
+  to { transform: translateY(-20px); }
+}
+
+/* Cały zestaw ikon lekko „faluje” */
+@keyframes floatIcons {
+  0% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.1) rotate(5deg); }
+  100% { transform: scale(1) rotate(0deg); }
 }
