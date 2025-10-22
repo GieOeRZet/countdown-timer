@@ -3,40 +3,46 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Flip Clock – Odliczanie do 22.10.2025 10:50</title>
+  <title>FlipClock + Zegar analogowy</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="content">
-    <h1>Odliczanie do 22 października 2025, godz. 10:50</h1>
+  <div class="container">
 
-    <div id="timer" class="flip-clock">
-      <div class="flip-unit" data-label="Dni">
-        <div class="card" id="days"></div>
-      </div>
-      <div class="flip-unit" data-label="Godzin">
-        <div class="card" id="hours"></div>
-      </div>
-      <div class="flip-unit" data-label="Minut">
-        <div class="card" id="minutes"></div>
-      </div>
-      <div class="flip-unit" data-label="Sekund">
-        <div class="card" id="seconds"></div>
+    <!-- FLIP CLOCK -->
+    <div class="content">
+      <h1>Odliczanie do 22 października 2025, godz. 10:50</h1>
+
+      <div id="timer" class="flip-clock">
+        <div class="flip-unit" data-label="Dni"><div class="card" id="days">00</div></div>
+        <div class="flip-unit" data-label="Godzin"><div class="card" id="hours">00</div></div>
+        <div class="flip-unit" data-label="Minut"><div class="card" id="minutes">00</div></div>
+        <div class="flip-unit" data-label="Sekund"><div class="card" id="seconds">00</div></div>
       </div>
     </div>
 
-    <button id="testButton">Testuj świętowanie 🎉</button>
-  </div>
+    <!-- DOLNA RAMKA -->
+    <div id="clock-frame">
+      <!-- ZEGAR ANALOGOWY -->
+      <div id="analogClock">
+        <div class="hand hour" id="hour-hand"></div>
+        <div class="hand minute" id="minute-hand"></div>
+        <div class="hand second" id="second-hand"></div>
+        <div class="center-dot"></div>
+      </div>
 
-  <!-- 🎆 Animacja po zakończeniu -->
-  <div id="celebration" class="hidden">
-    <div class="icons">
-      <span class="emoji">🥂</span>
-      <span class="emoji">🍾</span>
-      <span class="emoji">🎆</span>
-      <span class="emoji">🎉</span>
-      <span class="emoji">✨</span>
+      <!-- ANIMACJA ŚWIĘTOWANIA (ukryta na początku) -->
+      <div id="celebration" class="hidden">
+        <div class="icons">
+          <span class="emoji">🥂</span>
+          <span class="emoji">🍾</span>
+          <span class="emoji">🎆</span>
+          <span class="emoji">🎉</span>
+          <span class="emoji">✨</span>
+        </div>
+      </div>
     </div>
+
   </div>
 
   <script src="script.js"></script>
