@@ -10,16 +10,16 @@ const minutesEl = document.getElementById("minutes");
 const secondsEl = document.getElementById("seconds");
 const celebration = document.getElementById("celebration");
 const content = document.querySelector(".content");
+const testButton = document.getElementById("testButton");
 
-// Główna funkcja aktualizująca odliczanie
+// Aktualizacja licznika
 function updateTimer() {
   const now = new Date();
-  const diff = targetDate.getTime() - now.getTime(); // różnica w ms
+  const diff = targetDate.getTime() - now.getTime();
 
   // Po osiągnięciu daty docelowej
   if (diff <= 0) {
-    content.style.display = "none";              // ukryj licznik
-    celebration.classList.remove("hidden");      // pokaż animację świętowania
+    showCelebration();
     return;
   }
 
@@ -29,13 +29,22 @@ function updateTimer() {
   const minutes = Math.floor((diff / (1000 * 60)) % 60);
   const seconds = Math.floor((diff / 1000) % 60);
 
-  // Aktualizuj HTML
+  // Aktualizacja wartości w HTML
   daysEl.textContent = days;
   hoursEl.textContent = hours.toString().padStart(2, "0");
   minutesEl.textContent = minutes.toString().padStart(2, "0");
   secondsEl.textContent = seconds.toString().padStart(2, "0");
 }
 
-// Uruchom od razu i potem co sekundę
+// Funkcja pokazująca animację świętowania
+function showCelebration() {
+  content.style.display = "none";
+  celebration.classList.remove("hidden");
+}
+
+// Obsługa przycisku testowego
+testButton.addEventListener("click", showCelebration);
+
+// Uruchomienie licznika
 updateTimer();
 setInterval(updateTimer, 1000);
