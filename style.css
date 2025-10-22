@@ -1,4 +1,4 @@
-/* === UKŁAD PODSTAWOWY === */
+/* === GŁÓWNY UKŁAD === */
 body {
   background-color: #000;
   color: #00ff99;
@@ -18,32 +18,54 @@ body {
 
 h1 {
   font-size: 1.5em;
-  margin-bottom: 1.5em;
+  margin-bottom: 2em;
   color: #00ffaa;
 }
 
-#timer {
+/* === FLIP CLOCK === */
+.flip-clock {
   display: flex;
-  gap: 2em;
-  flex-wrap: wrap;
+  gap: 1em;
   justify-content: center;
 }
 
-.time-box {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.flip-unit {
+  position: relative;
+  width: 90px;
+  height: 120px;
+  perspective: 1000px;
 }
 
-.time-box span {
+.flip-unit::after {
+  content: attr(data-label);
+  position: absolute;
+  bottom: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #00ffaa;
+  font-size: 0.9em;
+}
+
+.card {
+  background-color: #111;
+  border: 2px solid #00ff99;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 255, 153, 0.3);
+  color: #00ffcc;
   font-size: 3em;
   font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.7s ease-in-out;
+  transform-style: preserve-3d;
 }
 
-.time-box label {
-  margin-top: 0.3em;
-  font-size: 1em;
-  color: #00ffaa;
+.card.flip {
+  transform: rotateX(-180deg);
 }
 
 /* === PRZYCISK TESTOWY === */
@@ -97,13 +119,11 @@ h1 {
   animation: bounce 1.5s ease-in-out infinite alternate;
 }
 
-/* Efekt podskakiwania ikon */
 @keyframes bounce {
   from { transform: translateY(0); }
   to { transform: translateY(-20px); }
 }
 
-/* Cały zestaw ikon lekko „faluje” */
 @keyframes floatIcons {
   0% { transform: scale(1) rotate(0deg); }
   50% { transform: scale(1.1) rotate(5deg); }
