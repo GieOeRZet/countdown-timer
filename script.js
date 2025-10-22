@@ -1,6 +1,16 @@
-// === LICZNIK DO 22.10.2025 10:50 ===
-const targetDate = new Date(2025, 9, 22, 10, 50, 0);
+// === LICZNIK DO 22.10.2025 10:50 CZASU LOKALNEGO ===
 
+// Tworzymy datę lokalną w sposób gwarantowany dla wszystkich przeglądarek:
+const targetDate = new Date();
+targetDate.setFullYear(2025);
+targetDate.setMonth(9); // październik (0 = styczeń)
+targetDate.setDate(22);
+targetDate.setHours(10);
+targetDate.setMinutes(50);
+targetDate.setSeconds(0);
+targetDate.setMilliseconds(0);
+
+// Elementy zegara
 const cards = {
   days: document.getElementById("days"),
   hours: document.getElementById("hours"),
@@ -12,6 +22,7 @@ const celebration = document.getElementById("celebration");
 const content = document.querySelector(".content");
 const testButton = document.getElementById("testButton");
 
+// Aktualizacja licznika
 function updateTimer() {
   const now = new Date();
   const diff = targetDate.getTime() - now.getTime();
@@ -32,6 +43,7 @@ function updateTimer() {
   updateCard(cards.seconds, s);
 }
 
+// Efekt "flip" — przewracanie kart
 function updateCard(card, newValue) {
   const currentValue = card.textContent || "0";
   if (currentValue !== newValue.toString()) {
@@ -43,12 +55,15 @@ function updateCard(card, newValue) {
   }
 }
 
+// Pokaż animację świętowania
 function showCelebration() {
   content.style.display = "none";
   celebration.classList.remove("hidden");
 }
 
+// Obsługa przycisku testowego
 testButton.addEventListener("click", showCelebration);
 
+// Start
 updateTimer();
 setInterval(updateTimer, 1000);
