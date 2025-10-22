@@ -1,182 +1,48 @@
-/* === PODSTAWY === */
 body {
-  background-color: #000;
-  color: #00ff99;
-  font-family: 'Courier New', Courier, monospace;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-  overflow: hidden;
+  margin:0;
+  height:100vh;
+  background:#000;
+  color:#00ff99;
+  font-family:'Courier New',monospace;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
 }
 
 .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
 }
 
-/* === FLIP CLOCK === */
-.content {
-  text-align: center;
-  margin-bottom: 2em;
+/* flip clock */
+.content{text-align:center;margin-bottom:2em;}
+h1{color:#00ffaa;font-size:1.3em;margin-bottom:1.5em;}
+.flip-clock{display:flex;gap:1em;justify-content:center;}
+.flip-unit{position:relative;width:90px;height:120px;perspective:1000px;}
+.flip-unit::after{content:attr(data-label);position:absolute;bottom:-25px;left:50%;
+  transform:translateX(-50%);font-size:.9em;color:#00ffaa;}
+.card{
+  background:#111;border:2px solid #00ff99;border-radius:8px;
+  color:#00ffcc;font-size:3em;font-weight:bold;
+  display:flex;align-items:center;justify-content:center;
+  height:100%;transition:transform .7s ease-in-out;transform-style:preserve-3d;
 }
+.card.flip{transform:rotateX(-180deg);}
 
-h1 {
-  font-size: 1.3em;
-  margin-bottom: 1.5em;
-  color: #00ffaa;
+/* zegar analogowy */
+#clock-frame{
+  width:400px;height:400px;border:3px solid #00ff99;border-radius:50%;
+  position:relative;overflow:hidden;box-shadow:0 0 20px rgba(0,255,153,.2);
 }
+#analogClock{position:relative;width:80%;height:80%;margin:auto;border:4px solid rgba(0,255,153,.4);border-radius:50%;}
+.hand{position:absolute;top:50%;left:50%;transform-origin:bottom center;background:#00ffaa;border-radius:5px;}
+.hour{width:6px;height:60px;}
+.minute{width:4px;height:90px;}
+.second{width:2px;height:100px;background:#ff0077;}
+.center-dot{position:absolute;width:12px;height:12px;background:#00ffcc;border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);}
 
-.flip-clock {
-  display: flex;
-  gap: 1em;
-  justify-content: center;
-}
-
-.flip-unit {
-  position: relative;
-  width: 90px;
-  height: 120px;
-  perspective: 1000px;
-}
-
-.flip-unit::after {
-  content: attr(data-label);
-  position: absolute;
-  bottom: -25px;
-  left: 50%;
-  transform: translateX(-50%);
-  color: #00ffaa;
-  font-size: 0.9em;
-}
-
-.card {
-  background-color: #111;
-  border: 2px solid #00ff99;
-  border-radius: 8px;
-  box-shadow: 0 0 15px rgba(0, 255, 153, 0.3);
-  color: #00ffcc;
-  font-size: 3em;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  overflow: hidden;
-  position: relative;
-  transition: transform 0.7s ease-in-out;
-  transform-style: preserve-3d;
-}
-
-.card.flip {
-  transform: rotateX(-180deg);
-}
-
-/* === DOLNA RAMKA === */
-#clock-frame {
-  width: 400px;
-  height: 400px;
-  border: 3px solid #00ff99;
-  border-radius: 50%;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 0 20px rgba(0,255,153,0.2);
-  overflow: hidden;
-}
-
-/* === ZEGAR ANALOGOWY === */
-#analogClock {
-  position: relative;
-  width: 80%;
-  height: 80%;
-  border: 4px solid rgba(0,255,153,0.4);
-  border-radius: 50%;
-}
-
-.hand {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform-origin: bottom center;
-  background-color: #00ffaa;
-  border-radius: 5px;
-}
-
-.hour {
-  width: 6px;
-  height: 60px;
-}
-
-.minute {
-  width: 4px;
-  height: 90px;
-}
-
-.second {
-  width: 2px;
-  height: 100px;
-  background-color: #ff0077;
-}
-
-.center-dot {
-  position: absolute;
-  width: 12px;
-  height: 12px;
-  background-color: #00ffcc;
-  border-radius: 50%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-/* === ANIMACJA ŚWIĘTOWANIA === */
-.hidden {
-  display: none;
-}
-
-#celebration {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at center, #000 30%, #001a12 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  animation: fadeIn 2s ease-in-out;
-}
-
-.icons {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 1.5rem;
-  animation: floatIcons 3s ease-in-out infinite;
-}
-
-.emoji {
-  font-size: 3rem;
-  animation: bounce 1.5s ease-in-out infinite alternate;
-}
-
-@keyframes bounce {
-  from { transform: translateY(0); }
-  to { transform: translateY(-15px); }
-}
-
-@keyframes floatIcons {
-  0% { transform: scale(1) rotate(0deg); }
-  50% { transform: scale(1.1) rotate(5deg); }
-  100% { transform: scale(1) rotate(0deg); }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
+/* płótno fajerwerków */
+.hidden{display:none;}
+#fireworks{position:absolute;top:0;left:0;width:100%;height:100%;display:block;}
