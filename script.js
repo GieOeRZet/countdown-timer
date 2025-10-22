@@ -1,16 +1,6 @@
-// === LICZNIK DO 22.10.2025 10:50 CZASU LOKALNEGO ===
+// === CEL: 22.10.2025 10:50 CZAS LOKALNY ===
+const targetDate = new Date(2025, 9, 22, 10, 50, 0);
 
-// Tworzymy datę docelową lokalnie (nie UTC)
-const targetDate = new Date();
-targetDate.setFullYear(2025);
-targetDate.setMonth(9); // 9 = październik
-targetDate.setDate(22);
-targetDate.setHours(10);
-targetDate.setMinutes(50);
-targetDate.setSeconds(0);
-targetDate.setMilliseconds(0);
-
-// Elementy licznika
 const cards = {
   days: document.getElementById("days"),
   hours: document.getElementById("hours"),
@@ -18,16 +8,14 @@ const cards = {
   seconds: document.getElementById("seconds"),
 };
 
+const analogClock = document.getElementById("analogClock");
 const celebration = document.getElementById("celebration");
-const content = document.querySelector(".content");
-const testButton = document.getElementById("testButton");
 
-// Funkcja aktualizująca zegar
+// ========== FLIP CLOCK ==========
 function updateTimer() {
   const now = new Date();
   const diff = targetDate - now;
 
-  // jeśli czas nie minął, licz dalej
   if (diff > 0) {
     const d = Math.floor(diff / (1000 * 60 * 60 * 24));
     const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
@@ -43,7 +31,6 @@ function updateTimer() {
   }
 }
 
-// Funkcja do animacji flip
 function updateCard(card, newValue) {
   const currentValue = card.textContent || "00";
   const formatted = newValue.toString().padStart(2, "0");
@@ -56,15 +43,34 @@ function updateCard(card, newValue) {
   }
 }
 
-// Pokazanie animacji po zakończeniu
+// ========== ZEGAR ANALOGOWY ==========
+const hourHand = document.getElementById("hour-hand");
+const minuteHand = document.getElementById("minute-hand");
+const secondHand = document.getElementById("second-hand");
+
+function updateAnalogClock() {
+  const now = new Date();
+  const seconds = now.getSeconds();
+  const minutes = now.getMinutes();
+  const hours = now.getHours() % 12;
+
+  const secondDeg = (seconds / 60) * 360;
+  const minuteDeg = (minutes / 60) * 360 + (seconds / 60) * 6;
+  const hourDeg = (hours / 12) * 360 + (minutes / 60) * 30;
+
+  hourHand.style.transform = `translate(-50%, -100%) rotate(${hourDeg}deg)`;
+  minuteHand.style.transform = `translate(-50%, -100%) rotate(${minuteDeg}deg)`;
+  secondHand.style.transform = `translate(-50%, -100%) rotate(${secondDeg}deg)`;
+}
+
+// ========== ZMIANA NA ANIMACJĘ ==========
 function showCelebration() {
-  content.style.display = "none";
+  analogClock.style.display = "none";
   celebration.classList.remove("hidden");
 }
 
-// Przycisk testowy
-testButton.addEventListener("click", showCelebration);
-
-// Uruchom licznik
-updateTimer();
+// Uruchomienie
+setInterval(updateAnalogClock, 1000);
 setInterval(updateTimer, 1000);
+updateAnalogClock();
+updateTimer();
