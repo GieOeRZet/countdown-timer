@@ -46,6 +46,24 @@ h1 {
   color: #00ffaa;
 }
 
+/* === PRZYCISK TESTOWY === */
+#testButton {
+  margin-top: 2em;
+  padding: 0.7em 1.5em;
+  background-color: #00ff99;
+  color: #000;
+  border: none;
+  border-radius: 10px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#testButton:hover {
+  background-color: #00ffaa;
+  transform: scale(1.05);
+}
+
 /* === ANIMACJA ŚWIĘTOWANIA === */
 .hidden {
   display: none;
